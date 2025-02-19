@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tr4de.in</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Body Styling */
+    body {
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      font-family: Arial, sans-serif;
+      color: #ffffff;
+      padding-top: 60px;
+    }
+    
+    /* Navbar Styles */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(to right, #141e30, #243b55);
+      padding: 15px 30px;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+      z-index: 10;
+    }
+    .navbar ul {
+      list-style: none;
+      display: flex;
+    }
+    .navbar ul li {
+      margin-right: 15px;
+    }
+    .navbar ul li a {
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: bold;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      background: #00c6ff;
+      transition: 0.3s ease;
+    }
+    .navbar ul li a:hover {
+      background: white;
+      color: #00c6ff;
+    }
+
+    /* Section Heading */
+    #Courses {
+      text-align: center;
+      padding: 40px 20px;
+    }
+    #Courses h1 {
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
+
+    /* Filters */
+    .filters {
+      margin: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+    .filters select {
+      padding: 5px 10px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background: #ffffff;
+      color: #333;
+      cursor: pointer;
+      width: 150px;
+    }
+
+    /* Courses Container */
+    .Courses-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+      min-height: 400px; /* To help avoid layout shift when pages have fewer items */
+    }
+
+    /* Course Card */
+    .Courses {
+      width: 300px;
+      height: 350px; /* Fixed height */
+      position: relative;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      border-radius: 8px;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    /* Dark overlay */
+    .Courses::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 8px;
+      z-index: 1;
+    }
+    /* Content container for text and button */
+    .course-info {
+      margin-top: auto;  /* Pushes content to the bottom */
+      position: relative;
+      z-index: 2;
+      padding: 10px;
+      text-align: center;
+    }
+    
+    
+    .course-info h3,
+    .course-info p,
+    .Enroll-btn {
+      position: relative;
+      z-index: 2;
+    }
+    .Enroll-btn {
+      display: inline-block;
+      padding: 10px;
+      background: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: 0.3s ease;
+      margin-top: 10px;
+    }
+    .Enroll-btn:hover {
+      background: #0056b3;
+    }
+
+    /* Pagination Buttons */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 20px 0;
+    }
+    .pagination button {
+      padding: 8px 15px;
+      background: #00c6ff;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.3s ease;
+    }
+    .pagination button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+    .pagination button:hover:not(:disabled) {
+      background: #007bff;
+    }
+    
+    .fa-whatsapp {
+  color: #1EBE5D; /* WhatsApp Green */
+}
+
+.fa-instagram {
+  color: #E4405F; /* Instagram Pink */
+}
+
+.fa-facebook{
+    color:#165DB6;
+}
+
+.fa-telegram{
+color:#0077B5;
+}
+
+    footer {
+    background: black !important;
+    color: #fff;
+    padding: 40px 0;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+    
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <ul>
+      <li><a href="Tr4de.html">Home</a></li>
+    </ul>
+  </nav>
+
+  <!-- Courses Section -->
+  <section id="Courses">
+    <h1>Courses</h1>
+
+    <!-- Filters -->
+    <div class="filters">
+      <select id="difficulty" name="difficulty">
+        <option value="all">All</option>
+        <option value="beginner">Beginner</option>
+        <option value="intermediate">Intermediate</option>
+        <option value="advanced">Advanced</option>
+      </select>
+
+      <select id="price" name="price">
+        <option value="all">All</option>
+        <option value="low">Low</option>
+        <option value="high">High</option>
+      </select>
+    </div>
+
+    <!-- Course Cards -->
+    <div class="Courses-container">
+      <!-- Sample courses (repeat as needed) -->
+      <div class="Courses" data-difficulty="beginner intermediate"
+       data-price="low" style="background-image: url('Basic.jpeg');">
+        <div class="course-info">
+          <h3>BASIC TO ADVANCED TRADING</h3>
+          <a href="#" class="Enroll-btn">Enroll now</a>
+        </div>
+      </div>
+
+      <div class="Courses" data-difficulty="intermediate advanced" data-price="low" style="background-image: url('CRT.jpeg');">
+        <div class="course-info">
+          <h3>CANDLE RANGE THEORY</h3>
+          
+          <a href="#" class="Enroll-btn">Enroll now</a>
+        </div>
+      </div>
+
+      <div class="Courses" data-difficulty="advanced" data-price="high"  style="background-image: url('ICT.jpeg');">
+        <div class="course-info">
+          <h3>SMART MONEY TRADING</h3>
+          <p>ICT - STRATEGY</p>
+          <a href="#" class="Enroll-btn">Enroll now</a>
+        </div>
+      </div>
+      
+      <div class="Courses" data-difficulty="beginner intermediate"
+       data-price="low" style="background-image: url('Basic.jpeg');">
+        <div class="course-info">
+          <h3>BASIC TO ADVANCED TRADING</h3>
+          <a href="#" class="Enroll-btn">Enroll now</a>
+        </div>
+      </div>
+
+      <div class="Courses" data-difficulty="intermediate advanced" data-price="low" style="background-image: url('CRT.jpeg');">
+        <div class="course-info">
+          <h3>CANDLE RANGE THEORY</h3>
+          
+          <a href="#" class="Enroll-btn">Enroll now</a>
+        </div>
+      </div>
+
+      <div class="Courses" data-difficulty="advanced" data-price="high"  style="background-image: url('ICT.jpeg');">
+        <div class="course-info">
+          <h3>SMART MONEY TRADING</h3>
+          <p>ICT - STRATEGY</p>
+          <a href="#" class="Enroll-btn">Enroll now</a>
+        </div>
+      </div>
+      
+      <!-- Duplicate more courses to demonstrate pagination -->
+      
+      
+      <!-- You can add more course cards as needed -->
+    </div>
+
+    <!-- Pagination Controls -->
+    <div class="pagination">
+      <button id="prevBtn">Previous</button>
+      <button id="nextBtn">Next</button>
+    </div>
+  </section>
+
+<!-- Footer Section -->
+<!-- Footer Section -->
+<footer style="background: #141e30; color: white; padding: 30px 20px; text-align: center; margin-top: 50px; position: relative;">
+    <div class="footer-container">
+        
+        <!-- Moving Forex Price Ticker -->
+        <div class="ticker-wrapper">
+            <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js">
+                {
+                    "symbols": [
+                        {"proName": "FX:EURUSD", "title": "EUR/USD"},
+                        {"proName": "FX:GBPUSD", "title": "GBP/USD"},
+                        {"proName": "FX:USDJPY", "title": "USD/JPY"},
+                        {"proName": "FX:AUDUSD", "title": "AUD/USD"},
+                        {"proName": "FX:USDCAD", "title": "USD/CAD"},
+                        {"proName": "FX:USDCHF", "title": "USD/CHF"},
+                        {"proName": "FX:NZDUSD", "title": "NZD/USD"}
+                    ],
+                    "colorTheme": "dark",
+                    "isTransparent": false,
+                    "displayMode": "adaptive",
+                    "locale": "en"
+                }
+                </script>
+            </div>
+        </div>
+
+        <!-- Social Media Links -->
+        <div class="footer-social" style="margin-top: 20px;">
+            <h3>Follow Us</h3>
+            <div style="display: flex; justify-content: center; gap: 15px; margin-top: 10px;">
+                <a href="#" style="color: white; font-size: 24px; transition: 0.3s;"><i class="fab fa-facebook"></i></a>
+                <a href="#" style="color: white; font-size: 24px; transition: 0.3s;"><i class="fab fa-telegram"></i></a>
+                <a href="https://chat.whatsapp.com/Ehw9ppiB7Hv7o2DQzUn4tF" style="color: white; font-size: 24px; transition: 0.3s;"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.instagram.com/tr4de.in?igsh=ajlhcnd0OW1zY2c2" style="color: white; font-size: 24px; transition: 0.3s;"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <p style="margin-top: 20px; font-size: 14px;">© 2025 Tr4de.in - All Rights Reserved</p>
+    </div>
+</footer>
+  <!-- JavaScript for Filtering and Pagination -->
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+    const difficultySelect = document.getElementById('difficulty');
+    const priceSelect = document.getElementById('price');
+    const courses = Array.from(document.querySelectorAll('.Courses')); // Convert NodeList to Array
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    const itemsPerPage = 4;
+    let currentPage = 1;
+    let filteredCourses = [];
+
+    // Function to filter courses based on selected filters
+    function applyFilter() {
+        const selectedDifficulty = difficultySelect.value;
+        const selectedPrice = priceSelect.value;
+
+        filteredCourses = courses.filter(course => {
+            const courseDifficulties = course.getAttribute('data-difficulty').split(" "); // Convert to array
+            const coursePrice = course.getAttribute('data-price');
+
+            const matchesDifficulty = selectedDifficulty === 'all' || courseDifficulties.includes(selectedDifficulty);
+            const matchesPrice = selectedPrice === 'all' || coursePrice === selectedPrice;
+
+            return matchesDifficulty && matchesPrice;
+        });
+
+        // Reset to page 1 when filters change
+        currentPage = 1;
+        updatePagination();
+    }
+
+    // Function to display courses for the current page
+    function updatePagination() {
+        // Hide all courses first
+        courses.forEach(course => course.style.display = 'none');
+
+        // Calculate indices for the current page
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+
+        // Show only courses for the current page
+        filteredCourses.slice(startIndex, endIndex).forEach(course => {
+            course.style.display = 'flex';
+        });
+
+        // Enable/disable pagination buttons
+        prevBtn.disabled = currentPage === 1;
+        nextBtn.disabled = endIndex >= filteredCourses.length;
+    }
+
+    // Pagination button event listeners
+    prevBtn.addEventListener('click', function () {
+        if (currentPage > 1) {
+            currentPage--;
+            updatePagination();
+        }
+    });
+
+    nextBtn.addEventListener('click', function () {
+        if (currentPage * itemsPerPage < filteredCourses.length) {
+            currentPage++;
+            updatePagination();
+        }
+    });
+
+    // Filter event listeners
+    difficultySelect.addEventListener('change', applyFilter);
+    priceSelect.addEventListener('change', applyFilter);
+
+    // Initial filter and pagination setup
+    applyFilter();
+});
+  </script>
+</body>
+</html>
